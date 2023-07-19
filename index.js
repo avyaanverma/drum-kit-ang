@@ -5,11 +5,18 @@ for(var i = 0; i < document.querySelectorAll(".drum").length; i++ ){
 
         this.style.color = "white"
         var buttonClicked = this.innerHTML
-        // keypressed = buttonClicked;
+       
         PlayAudio(buttonClicked);
+
+        buttonAnimation(buttonClicked)
         
     });
 }
+document.addEventListener("keypress", function(event) {
+   PlayAudio(event.key);
+
+   buttonAnimation(event.key);
+})
 function PlayAudio(key){
     switch(key) {
         case "w": // kick-bass
@@ -42,9 +49,13 @@ function PlayAudio(key){
             tom4.play()
       }
 }
-document.addEventListener("keypress", function(event) {
-   PlayAudio(event.key);
-})
+function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("."+currentKey)
+    activeButton.classList.add("pressed");
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
 
+}
 
 
